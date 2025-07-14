@@ -1,0 +1,1456 @@
+{
+  "grossSalary": 9800000,
+  "unworkedDaysPayMultiplier": 1,
+  "allIncome": 9800000,
+  "otherCosts": 0,
+  "fullPeriodGrossSalary": 9800000,
+  "totalEmployerContribution": 4962407.126232,
+  "totalEmployeeContribution": 3337833.3333333335,
+  "totalEmployeeTakeHome": 6462166.666666666,
+  "totalEmployerCost": 14762407.126232,
+  "employerContributions": [
+    {
+      "config": {
+        "type": "SOCIAL_SECURITY",
+        "input": "${allIncome}",
+        "subtype": "Social Security NSSF",
+        "inputMax": "",
+        "inputMin": "",
+        "conditions": [],
+        "percentage": 10,
+        "outputModifier": "",
+        "calculationType": "FLAT_PERCENTAGE",
+        "allowNegativeContribution": false,
+        "contributionClassification": "DEFAULT"
+      },
+      "resolvedInput": 9800000,
+      "amountWithoutBenefitMarkup": 980000,
+      "amount": 980000,
+      "resolvedFlatPercentage": 10
+    },
+    {
+      "config": {
+        "rows": [
+          {
+            "options": {
+              "selectPlan": "premiumPlus",
+              "employeeAge": "under39"
+            },
+            "conditionExpression": null,
+            "absolute": 144
+          },
+          {
+            "options": {
+              "selectPlan": "premiumPlus",
+              "employeeAge": "between40And49"
+            },
+            "conditionExpression": null,
+            "absolute": 217
+          },
+          {
+            "options": {
+              "selectPlan": "premiumPlus",
+              "employeeAge": "between50And59"
+            },
+            "conditionExpression": null,
+            "absolute": 337
+          },
+          {
+            "options": {
+              "selectPlan": "premiumPlus",
+              "employeeAge": "between60And74"
+            },
+            "conditionExpression": null,
+            "absolute": 614
+          },
+          {
+            "options": { "selectPlan": "premium", "employeeAge": "under39" },
+            "conditionExpression": null,
+            "absolute": 92
+          },
+          {
+            "options": {
+              "selectPlan": "premium",
+              "employeeAge": "between40And49"
+            },
+            "conditionExpression": null,
+            "absolute": 137
+          },
+          {
+            "options": {
+              "selectPlan": "premium",
+              "employeeAge": "between50And59"
+            },
+            "conditionExpression": null,
+            "absolute": 213
+          },
+          {
+            "options": {
+              "selectPlan": "premium",
+              "employeeAge": "between60And74"
+            },
+            "conditionExpression": null,
+            "absolute": 393
+          }
+        ],
+        "type": "MEDICAL",
+        "input": "${allIncome}",
+        "subtype": "Private Medical Insurance",
+        "inputMax": "",
+        "inputMin": "",
+        "conditions": [
+          {
+            "type": "OPTION_EQUAL",
+            "optionId": "medicalInsurance",
+            "value": true,
+            "matchEmpty": false,
+            "negate": false
+          },
+          {
+            "type": "OPTION_EQUAL",
+            "optionId": "overridePremium",
+            "value": true,
+            "matchEmpty": true,
+            "negate": false
+          }
+        ],
+        "outputModifier": "*${usdToLocalExchange}",
+        "calculationType": "OPTION_TABLE",
+        "benefitConfiguration": {
+          "benefitId": "8b4ebc75-a907-4571-8cc7-cd17a1831d9e",
+          "obligation": "OPTIONAL_PER_EMPLOYEE",
+          "totalCostRange": [58.3, 1186.9],
+          "benefitProviderId": "81f62b24-1a39-4010-ac39-f63e967043fa",
+          "includedInPayroll": false,
+          "benefitAdminExpense": 10,
+          "automateActivation": false
+        },
+        "allowNegativeContribution": false,
+        "contributionClassification": "DEFAULT"
+      },
+      "resolvedInput": 9800000,
+      "amountWithoutBenefitMarkup": 329901.58652,
+      "amount": 1388455.372832
+    },
+    {
+      "config": {
+        "type": "BENEFIT",
+        "amount": "140 * ${usdToLocalExchange}",
+        "subtype": "Adverse Financial History (Credit)",
+        "conditions": [
+          { "type": "FIRST_PAY_PERIOD" },
+          {
+            "type": "OPTION_EQUAL",
+            "value": true,
+            "negate": false,
+            "optionId": "employeeBackgroundChecks",
+            "matchEmpty": false
+          },
+          {
+            "type": "OPTION_EQUAL",
+            "value": true,
+            "negate": false,
+            "optionId": "adverseFinancialHistory",
+            "matchEmpty": false
+          }
+        ],
+        "outputModifier": "",
+        "calculationType": "ABSOLUTE",
+        "benefitConfiguration": {
+          "benefitId": "fca4ae79-6747-4e58-a63d-a818f826e471",
+          "obligation": "OPTIONAL_PER_EMPLOYEE",
+          "totalCostRange": [50, 200],
+          "benefitProviderId": "7dae1c23-74f3-4587-a33c-59d8a693314a",
+          "includedInPayroll": false,
+          "automateActivation": false,
+          "benefitAdminExpense": 0
+        },
+        "allowNegativeContribution": false,
+        "contributionClassification": "DEFAULT"
+      },
+      "resolvedInput": null,
+      "amount": 502024.1534,
+      "amountWithoutBenefitMarkup": 502024.1534
+    },
+    {
+      "config": {
+        "type": "MISCELLANEOUS",
+        "calculationType": "FLAT_PERCENTAGE",
+        "subtype": "Workers Accident Insurance",
+        "outputModifier": "",
+        "contributionClassification": "DEFAULT",
+        "conditions": [],
+        "allowNegativeContribution": false,
+        "input": "((${monthlyGrossSalary} - ${otherCosts})*5)*0.003+((((${monthlyGrossSalary} - ${otherCosts})*5)*0.003)*0.005) + (((${monthlyGrossSalary} - ${otherCosts})*5)*0.003+((((${monthlyGrossSalary} - ${otherCosts})*5)*0.003)*0.005))*0.18",
+        "inputMin": "",
+        "inputMax": "",
+        "percentage": "100",
+        "benefitConfiguration": {
+          "benefitId": "bd9269bc-bddd-4333-bab9-b7e04ae8c35e",
+          "benefitProviderId": "c41ef655-a492-4c39-81b7-5c950eb2e603",
+          "includedInPayroll": true,
+          "obligation": "MANDATORY_FOR_ALL_EMPLOYEES",
+          "totalCostRange": [0.3, 0.3],
+          "benefitAdminExpense": 0,
+          "automateActivation": false
+        },
+        "annual": { "type": "FROM_ACTIVATION", "month": 6 },
+        "ref": ""
+      },
+      "resolvedInput": 174327.3,
+      "amountWithoutBenefitMarkup": 2091927.5999999999,
+      "amount": 2091927.5999999999,
+      "resolvedFlatPercentage": 100
+    }
+  ],
+  "employeeContributions": [
+    {
+      "config": {
+        "type": "SOCIAL_SECURITY",
+        "input": "${allIncome}",
+        "subtype": "Social Security NSSF",
+        "inputMax": "",
+        "inputMin": "",
+        "conditions": [],
+        "percentage": 5,
+        "calculationType": "FLAT_PERCENTAGE",
+        "outputModifier": "",
+        "contributionClassification": "DEFAULT",
+        "allowNegativeContribution": false
+      },
+      "resolvedInput": 9800000,
+      "amountWithoutBenefitMarkup": 490000,
+      "amount": 490000,
+      "resolvedFlatPercentage": 5
+    },
+    {
+      "config": {
+        "ref": "localServiceTax",
+        "type": "MISCELLANEOUS",
+        "input": "${monthlyGrossSalary}",
+        "tiers": [
+          [100001, 0, 0],
+          [200001, 0, "5000/12"],
+          [300001, 0, "10000/12"],
+          [400001, 0, "20000/12"],
+          [500001, 0, "30000/12"],
+          [600001, 0, "40000/12"],
+          [700001, 0, "60000/12"],
+          [800001, 0, "70000/12"],
+          [900001, 0, "80000/12"],
+          [1000001, 0, "90000/12"],
+          [null, 0, "100000/12"]
+        ],
+        "subtype": "LOCAL_SERVICE_TAX",
+        "inputMax": "",
+        "inputMin": "",
+        "conditions": [],
+        "outputModifier": "",
+        "calculationType": "PROGRESSIVE",
+        "treatAsCategories": true
+      },
+      "resolvedInput": 9800000,
+      "amountWithoutBenefitMarkup": 8333.333333333334,
+      "amount": 8333.333333333334,
+      "resolvedTiers": [
+        [100001, 0, 0],
+        [200001, 0, 416.6666666666667],
+        [300001, 0, 833.3333333333334],
+        [400001, 0, 1666.6666666666667],
+        [500001, 0, 2500],
+        [600001, 0, 3333.3333333333335],
+        [700001, 0, 5000],
+        [800001, 0, 5833.333333333333],
+        [900001, 0, 6666.666666666667],
+        [1000001, 0, 7500],
+        [null, 0, 8333.333333333334]
+      ]
+    },
+    {
+      "config": {
+        "type": "INCOME_TAX",
+        "input": "${allIncome} - ${localServiceTax}",
+        "tiers": [
+          ["235000", 0, 0],
+          ["335000", "10", 0],
+          ["410000", "20", 0],
+          ["10000000", "30", 0],
+          [null, "40", 0]
+        ],
+        "subtype": "",
+        "inputMax": "",
+        "inputMin": "",
+        "conditions": [],
+        "outputModifier": "",
+        "calculationType": "PROGRESSIVE",
+        "treatAsCategories": false
+      },
+      "resolvedInput": 9791666.666666666,
+      "amountWithoutBenefitMarkup": 2839500,
+      "amount": 2839500,
+      "resolvedTiers": [
+        [235000, 0, 0],
+        [335000, 10, 0],
+        [410000, 20, 0],
+        [10000000, 30, 0],
+        [null, 40, 0]
+      ],
+      "amountPerTier": [0, 10000, 15000, 2814500]
+    }
+  ],
+  "employeeContext": {
+    "id": "6f9b00fb-5283-489c-8098-7329e0d77a2d",
+    "monthlyGrossSalary": 9800000,
+    "confirmedOvertimePay": 0,
+    "confirmedBackPay": 0,
+    "confirmedBonuses": 0,
+    "confirmedShiftDifferentialPay": 0,
+    "confirmedDiscretionary": 0,
+    "confirmedCommissions": 0,
+    "confirmedExpenses": 0,
+    "confirmedDirectExpenses": 0,
+    "confirmedAllowances": 0,
+    "confirmedBenefits": 0,
+    "netDeductions": 0,
+    "grossDeductions": 0,
+    "salaryWageOverPaymentDeduction": 0,
+    "confirmedLeaveDays": 0,
+    "remainingLeaveDays": 0,
+    "unpaidLeaveDeductionMultiplier": 0,
+    "otherCosts": 0,
+    "options": {
+      "medicalInsurance": true,
+      "selectPlan": "premium",
+      "employeeAge": "under39",
+      "overridePremium": null,
+      "pension": true,
+      "employeeBackgroundChecks": true,
+      "academicAchievement": false,
+      "adverseFinancialHistory": true,
+      "criminalRecord": false,
+      "basicPackage": false,
+      "standardPackage": true,
+      "providentfund": false,
+      "pensioncontribution": "option1",
+      "employeeprovidentfund": false,
+      "overrideeprovident": null,
+      "benefitConfig": {
+        "8b4ebc75-a907-4571-8cc7-cd17a1831d9e": {
+          "status": "ONBOARDING_COMPLETE",
+          "activationDate": "2025-07-01",
+          "employerOverride": { "contributionOverride": 352 }
+        },
+        "fca4ae79-6747-4e58-a63d-a818f826e471": {
+          "status": "ONBOARDING_COMPLETE",
+          "activationDate": "2025-07-01"
+        },
+        "bd9269bc-bddd-4333-bab9-b7e04ae8c35e": {
+          "activationDate": "2025-07-01",
+          "status": "ONBOARDING_COMPLETE",
+          "employerOverride": {}
+        }
+      }
+    },
+    "contract": {
+      "annualLeaveDays": 0,
+      "start": "2025-07-01",
+      "workingDays": ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"],
+      "workingHours": ["08:00", "17:00"]
+    },
+    "salaryHistory": {},
+    "isNewStarter": true
+  },
+  "territoryContext": {
+    "options": {
+      "medicalInsurance": {
+        "type": "BOOLEAN",
+        "display": {
+          "label": "Private Medical Insurance",
+          "caption": "Offer your employee comprehensive global medical coverage through SafetyWing. This plan provides worldwide protection and can include dependents. Employees may also choose to cover their dependents at their own expense. To ensure coverage from day one, enrollment can begin on the 1st or 15th of the month preceding the start date.",
+          "benefitDocuments": [
+            {
+              "filename": "SafetyWing Collateral.pdf",
+              "reference": "document-collateral/UG/4a49b888-fb9c-4f3c-a4ec-48ef43aab001-1030271f83379f1c9d6705d43b57d18f.pdf"
+            }
+          ]
+        },
+        "required": false,
+        "defaultValue": false
+      },
+      "selectPlan": {
+        "type": "SELECT",
+        "display": {
+          "label": "Select plan:",
+          "conditions": [
+            {
+              "type": "OPTION_EQUAL",
+              "match": true,
+              "optionId": "medicalInsurance"
+            }
+          ]
+        },
+        "required": true,
+        "selections": [
+          { "id": "premiumPlus", "label": "Premium Plus" },
+          { "id": "premium", "label": "Premium" }
+        ],
+        "defaultValue": "premiumPlus"
+      },
+      "employeeAge": {
+        "type": "SELECT",
+        "display": {
+          "label": "Please select the employee’s age range (in years):",
+          "conditions": [
+            {
+              "type": "OPTION_EQUAL",
+              "match": true,
+              "optionId": "medicalInsurance"
+            }
+          ]
+        },
+        "required": true,
+        "selections": [
+          { "id": "under39", "label": "18 - 39" },
+          { "id": "between40And49", "label": "40 - 49" },
+          { "id": "between50And59", "label": "50 - 59" },
+          { "id": "between60And74", "label": "60 - 74" }
+        ],
+        "defaultValue": "under39"
+      },
+      "overridePremium": {
+        "type": "BOOLEAN_NUMBER",
+        "display": {
+          "label": "Override Premium:",
+          "advanced": true,
+          "conditions": [
+            {
+              "type": "OPTION_EQUAL",
+              "match": true,
+              "optionId": "medicalInsurance"
+            }
+          ]
+        },
+        "required": false,
+        "defaultValue": null
+      },
+      "pension": {
+        "type": "BOOLEAN",
+        "display": {
+          "label": "Pension",
+          "locked": true,
+          "caption": "Calculated on the employee's gross salary",
+          "advanced": false
+        },
+        "required": true,
+        "defaultValue": true
+      },
+      "employeeBackgroundChecks": {
+        "type": "BOOLEAN",
+        "display": {
+          "label": "Employee Background Checks ",
+          "caption": "Guarantee the authenticity of your hires by conducting comprehensive background checks. Choose from our curated selection of recommended checks below. If there's a specific check you require that isn't listed, please contact your assigned Customer Success Manager for personalized assistance.",
+          "benefitDocuments": [
+            {
+              "filename": "Benefits Collateral - Veremark.pdf",
+              "reference": "document-collateral/UG/4a49b888-fb9c-4f3c-a4ec-48ef43aab001-bf9bc718d337791c408d5740345411e1.pdf"
+            }
+          ]
+        },
+        "required": false,
+        "defaultValue": false
+      },
+      "academicAchievement": {
+        "type": "BOOLEAN",
+        "display": {
+          "label": "Academic Achievement",
+          "caption": "Verification of educational credentials, ensuring the accuracy and legitimacy of an individual's academic background. This check confirms degrees, certifications, and other educational achievements claimed by the candidate. ",
+          "conditions": [
+            {
+              "type": "OPTION_EQUAL",
+              "match": true,
+              "optionId": "employeeBackgroundChecks"
+            }
+          ]
+        },
+        "required": false,
+        "defaultValue": false
+      },
+      "adverseFinancialHistory": {
+        "type": "BOOLEAN",
+        "display": {
+          "label": "Adverse Financial History (Credit)",
+          "caption": "Examination of an individual's financial history, including credit reports and potential adverse financial events. This check helps assess a person's financial responsibility, identifying any issues such as bankruptcies, defaults, or late payments.",
+          "conditions": [
+            {
+              "type": "OPTION_EQUAL",
+              "match": true,
+              "optionId": "employeeBackgroundChecks"
+            }
+          ]
+        },
+        "required": false,
+        "defaultValue": false
+      },
+      "criminalRecord": {
+        "type": "BOOLEAN",
+        "display": {
+          "label": "Criminal Record",
+          "caption": "Investigation into an individual's criminal history to identify any convictions or pending charges. This check is crucial for assessing potential risks and ensuring the safety and suitability of an individual for a particular role or responsibility. ",
+          "conditions": [
+            {
+              "type": "OPTION_EQUAL",
+              "match": true,
+              "optionId": "employeeBackgroundChecks"
+            }
+          ]
+        },
+        "required": false,
+        "defaultValue": false
+      },
+      "basicPackage": {
+        "type": "BOOLEAN",
+        "display": {
+          "label": "Basic Package",
+          "caption": "This package includes: Global Sanctions Check; National ID check; and two Employment Reference checks",
+          "conditions": [
+            {
+              "type": "OPTION_EQUAL",
+              "match": true,
+              "optionId": "employeeBackgroundChecks"
+            }
+          ]
+        },
+        "required": false,
+        "defaultValue": false
+      },
+      "standardPackage": {
+        "type": "BOOLEAN",
+        "display": {
+          "label": "Standard Package",
+          "caption": "This includes the Basic Package offerings, plus a criminal record check",
+          "conditions": [
+            {
+              "type": "OPTION_EQUAL",
+              "match": true,
+              "optionId": "employeeBackgroundChecks"
+            }
+          ]
+        },
+        "required": false,
+        "defaultValue": false
+      },
+      "providentfund": {
+        "type": "BOOLEAN",
+        "required": false,
+        "defaultValue": false,
+        "display": {
+          "label": "Provident Fund",
+          "caption": "Provide your employees with long term savings to support their retirement. A contribution of either 5% or 10% of the employee’s gross monthly salary will be made to the Playroll Provident fund through UAP Life. Employees can also contribute between 1%-10% "
+        }
+      },
+      "pensioncontribution": {
+        "type": "SELECT",
+        "required": true,
+        "defaultValue": "option1",
+        "selections": [
+          { "id": "option1", "label": "5" },
+          { "id": "option 2", "label": "10" }
+        ],
+        "display": {
+          "label": "Pension Contribution ",
+          "caption": "Please select the % provident fund contribution",
+          "conditions": [
+            {
+              "type": "OPTION_EQUAL",
+              "optionId": "providentfund",
+              "match": true
+            }
+          ]
+        }
+      },
+      "employeeprovidentfund": {
+        "type": "BOOLEAN",
+        "required": false,
+        "defaultValue": false,
+        "display": {
+          "label": "Employee Provident Fund",
+          "advanced": true,
+          "caption": "Is employee contributing to a provident fund?"
+        }
+      },
+      "overrideeprovident": {
+        "type": "BOOLEAN_NUMBER",
+        "required": false,
+        "defaultValue": null,
+        "display": {
+          "label": "Override Employee Provident Fund",
+          "advanced": true,
+          "conditions": [
+            {
+              "type": "OPTION_EQUAL",
+              "optionId": "employeeprovidentfund",
+              "match": true
+            }
+          ],
+          "caption": "Insert percentage here (example 5 if employee is contributing 5%)"
+        }
+      }
+    },
+    "taxYear": { "start": "03-01" },
+    "overtime": { "hourlyPayMultiplier": 0 },
+    "constants": {},
+    "formConfig": {
+      "workingHours": {
+        "hoursEnd": "17:00",
+        "hoursStart": "08:00",
+        "workWeekEnd": "FRIDAY",
+        "minWageAnnual": 1560000,
+        "workWeekStart": "MONDAY",
+        "maxHoursPerDay": 9,
+        "maxHoursPerWeek": 45,
+        "countPublicHolidays": 18
+      },
+      "employmentTerms": {
+        "probation": {
+          "period": "MONTH",
+          "caption": "The maximum probation period can be extended to 1 year with the consent of the employee",
+          "required": false,
+          "validation": { "max": 6, "min": 0 },
+          "initialValue": null
+        },
+        "sickLeave": {
+          "period": "DAY",
+          "caption": "At full pay. The employee can take a further 30 days of sick leave at half pay",
+          "required": true,
+          "validation": { "min": 30 },
+          "initialValue": 30
+        },
+        "studyLeave": null,
+        "annualLeave": {
+          "period": "DAY",
+          "caption": "Accrued at a rate of 7 days per 4 months of continuous service. Please note the number of annual leave days stated here are in addition to any mandatory statutory non-working public holidays.",
+          "required": true,
+          "validation": { "min": 21 },
+          "initialValue": 21
+        },
+        "familyLeave": null,
+        "noticePeriod": {
+          "period": "DAY",
+          "caption": "The minimum notice period increases the longer the person is employed, up to 3 months if the employee has worked for more than 10 years. Please note, Playroll Notice Periods may not exceed 90 days, and in some territories, the maximum Notice Period is limited to less than 90 days.",
+          "required": true,
+          "validation": { "max": 90 },
+          "initialValue": 90,
+          "numericInputDisabled": false
+        },
+        "parentalLeave": null
+      },
+      "additionalCaptions": {
+        "annualSalaryLabel": "Gross Annual Salary",
+        "employeeDisclaimer": "Local service tax is deducted from the employees income quarterly ",
+        "monthlySalaryLabel": "Gross Monthly Salary"
+      }
+    },
+    "countryCode": "UG",
+    "featureFlags": {
+      "salaryPegTool": true,
+      "detailedInvoiceBreakdown": true,
+      "salaryPaymentsInForeignCurrency": true
+    },
+    "leaveAccrual": {
+      "enabled": true,
+      "accrualStartDate": "EMPLOYEE_START_DATE",
+      "doesLeaveCarryOver": "YES",
+      "limitOnTakingLeave": "YES",
+      "limitOnCarriedOverLeave": 0,
+      "beginningOfSpecificMonth": "JANUARY",
+      "doesCarriedOverLeaveExpire": "NO",
+      "carriedOverLeaveExpiryPeriod": { "unit": "DAYS", "value": 0 },
+      "isThereLimitOnCarriedOverLeave": "NO",
+      "monthsAfterStartDateUntilLeaveCanBeTaken": "12"
+    },
+    "customHandlers": {},
+    "sickLeaveCycle": 365,
+    "severancePolicy": "NONE",
+    "sickLeavePolicy": "PAID",
+    "leaveCyclePeriod": 365,
+    "unworkedDaysPolicy": "CALENDAR_DAYS",
+    "accruedSeveranceRate": 0,
+    "salaryPaymentCurrencies": ["USD"],
+    "employeeContributionConfigurations": [
+      {
+        "type": "SOCIAL_SECURITY",
+        "input": "${allIncome}",
+        "subtype": "Social Security NSSF",
+        "inputMax": "",
+        "inputMin": "",
+        "conditions": [],
+        "percentage": 5,
+        "calculationType": "FLAT_PERCENTAGE",
+        "outputModifier": "",
+        "contributionClassification": "DEFAULT",
+        "allowNegativeContribution": false
+      },
+      {
+        "ref": "localServiceTax",
+        "type": "MISCELLANEOUS",
+        "input": "${monthlyGrossSalary}",
+        "tiers": [
+          [100001, 0, 0],
+          [200001, 0, "5000/12"],
+          [300001, 0, "10000/12"],
+          [400001, 0, "20000/12"],
+          [500001, 0, "30000/12"],
+          [600001, 0, "40000/12"],
+          [700001, 0, "60000/12"],
+          [800001, 0, "70000/12"],
+          [900001, 0, "80000/12"],
+          [1000001, 0, "90000/12"],
+          [null, 0, "100000/12"]
+        ],
+        "subtype": "LOCAL_SERVICE_TAX",
+        "inputMax": "",
+        "inputMin": "",
+        "conditions": [],
+        "outputModifier": "",
+        "calculationType": "PROGRESSIVE",
+        "treatAsCategories": true
+      },
+      {
+        "type": "INCOME_TAX",
+        "input": "${allIncome} - ${localServiceTax}",
+        "tiers": [
+          ["235000", 0, 0],
+          ["335000", "10", 0],
+          ["410000", "20", 0],
+          ["10000000", "30", 0],
+          [null, "40", 0]
+        ],
+        "subtype": "",
+        "inputMax": "",
+        "inputMin": "",
+        "conditions": [],
+        "outputModifier": "",
+        "calculationType": "PROGRESSIVE",
+        "treatAsCategories": false
+      },
+      {
+        "type": "PROVIDENT_FUND",
+        "calculationType": "FLAT_PERCENTAGE",
+        "subtype": "Employee Provident Fund",
+        "outputModifier": "",
+        "contributionClassification": "DEFAULT",
+        "conditions": [
+          {
+            "type": "OPTION_EQUAL",
+            "optionId": "employeeprovidentfund",
+            "value": true,
+            "matchEmpty": false,
+            "negate": false
+          }
+        ],
+        "allowNegativeContribution": false,
+        "input": "${monthlyGrossSalary}",
+        "inputMin": "",
+        "inputMax": "",
+        "percentage": "${options.overrideeprovident OR 0}",
+        "benefitConfiguration": {
+          "benefitId": "5d9339b7-ff8a-402a-a6b8-7459f9593e55",
+          "benefitProviderId": "37bc3f90-252d-44f6-9be1-67689ebd6abb",
+          "includedInPayroll": true,
+          "obligation": "OPTIONAL_PER_EMPLOYEE",
+          "totalCostRange": [5, 10],
+          "benefitAdminExpense": 0,
+          "automateActivation": false
+        }
+      }
+    ],
+    "employerContributionConfigurations": [
+      {
+        "type": "SOCIAL_SECURITY",
+        "input": "${allIncome}",
+        "subtype": "Social Security NSSF",
+        "inputMax": "",
+        "inputMin": "",
+        "conditions": [],
+        "percentage": 10,
+        "outputModifier": "",
+        "calculationType": "FLAT_PERCENTAGE",
+        "allowNegativeContribution": false,
+        "contributionClassification": "DEFAULT"
+      },
+      {
+        "rows": [
+          {
+            "options": {
+              "selectPlan": "premiumPlus",
+              "employeeAge": "under39"
+            },
+            "conditionExpression": null,
+            "absolute": 144
+          },
+          {
+            "options": {
+              "selectPlan": "premiumPlus",
+              "employeeAge": "between40And49"
+            },
+            "conditionExpression": null,
+            "absolute": 217
+          },
+          {
+            "options": {
+              "selectPlan": "premiumPlus",
+              "employeeAge": "between50And59"
+            },
+            "conditionExpression": null,
+            "absolute": 337
+          },
+          {
+            "options": {
+              "selectPlan": "premiumPlus",
+              "employeeAge": "between60And74"
+            },
+            "conditionExpression": null,
+            "absolute": 614
+          },
+          {
+            "options": { "selectPlan": "premium", "employeeAge": "under39" },
+            "conditionExpression": null,
+            "absolute": 92
+          },
+          {
+            "options": {
+              "selectPlan": "premium",
+              "employeeAge": "between40And49"
+            },
+            "conditionExpression": null,
+            "absolute": 137
+          },
+          {
+            "options": {
+              "selectPlan": "premium",
+              "employeeAge": "between50And59"
+            },
+            "conditionExpression": null,
+            "absolute": 213
+          },
+          {
+            "options": {
+              "selectPlan": "premium",
+              "employeeAge": "between60And74"
+            },
+            "conditionExpression": null,
+            "absolute": 393
+          }
+        ],
+        "type": "MEDICAL",
+        "input": "${allIncome}",
+        "subtype": "Private Medical Insurance",
+        "inputMax": "",
+        "inputMin": "",
+        "conditions": [
+          {
+            "type": "OPTION_EQUAL",
+            "optionId": "medicalInsurance",
+            "value": true,
+            "matchEmpty": false,
+            "negate": false
+          },
+          {
+            "type": "OPTION_EQUAL",
+            "optionId": "overridePremium",
+            "value": true,
+            "matchEmpty": true,
+            "negate": false
+          }
+        ],
+        "outputModifier": "*${usdToLocalExchange}",
+        "calculationType": "OPTION_TABLE",
+        "benefitConfiguration": {
+          "benefitId": "8b4ebc75-a907-4571-8cc7-cd17a1831d9e",
+          "obligation": "OPTIONAL_PER_EMPLOYEE",
+          "totalCostRange": [58.3, 1186.9],
+          "benefitProviderId": "81f62b24-1a39-4010-ac39-f63e967043fa",
+          "includedInPayroll": false,
+          "benefitAdminExpense": 10,
+          "automateActivation": false
+        },
+        "allowNegativeContribution": false,
+        "contributionClassification": "DEFAULT"
+      },
+      {
+        "type": "MEDICAL",
+        "amount": "${options.overridePremium OR 0}*${usdToLocalExchange}",
+        "subtype": "Private Medical Insurance",
+        "conditions": [
+          {
+            "type": "OPTION_EQUAL",
+            "value": true,
+            "negate": false,
+            "optionId": "medicalInsurance",
+            "matchEmpty": false
+          },
+          {
+            "type": "OPTION_EQUAL",
+            "value": true,
+            "negate": true,
+            "lessThan": false,
+            "optionId": "overridePremium",
+            "matchEmpty": false,
+            "greaterThan": false
+          }
+        ],
+        "outputModifier": "",
+        "calculationType": "ABSOLUTE",
+        "benefitConfiguration": {
+          "benefitId": "8b4ebc75-a907-4571-8cc7-cd17a1831d9e",
+          "obligation": "OPTIONAL_PER_EMPLOYEE",
+          "totalCostRange": [58.3, 1186.9],
+          "benefitProviderId": "81f62b24-1a39-4010-ac39-f63e967043fa",
+          "includedInPayroll": false,
+          "benefitAdminExpense": 10,
+          "automateActivation": false
+        },
+        "allowNegativeContribution": false,
+        "contributionClassification": "DEFAULT"
+      },
+      {
+        "type": "BENEFIT",
+        "amount": "90 * ${usdToLocalExchange}",
+        "subtype": "Academic Achievement",
+        "conditions": [
+          { "type": "FIRST_PAY_PERIOD" },
+          {
+            "type": "OPTION_EQUAL",
+            "value": true,
+            "negate": false,
+            "optionId": "employeeBackgroundChecks",
+            "matchEmpty": false
+          },
+          {
+            "type": "OPTION_EQUAL",
+            "value": true,
+            "negate": false,
+            "optionId": "academicAchievement",
+            "matchEmpty": false
+          }
+        ],
+        "outputModifier": "",
+        "calculationType": "ABSOLUTE",
+        "benefitConfiguration": {
+          "benefitId": "fca4ae79-6747-4e58-a63d-a818f826e471",
+          "obligation": "OPTIONAL_PER_EMPLOYEE",
+          "totalCostRange": [50, 200],
+          "benefitProviderId": "7dae1c23-74f3-4587-a33c-59d8a693314a",
+          "includedInPayroll": false,
+          "automateActivation": false,
+          "benefitAdminExpense": 0
+        },
+        "allowNegativeContribution": false,
+        "contributionClassification": "DEFAULT"
+      },
+      {
+        "type": "BENEFIT",
+        "amount": "140 * ${usdToLocalExchange}",
+        "subtype": "Adverse Financial History (Credit)",
+        "conditions": [
+          { "type": "FIRST_PAY_PERIOD" },
+          {
+            "type": "OPTION_EQUAL",
+            "value": true,
+            "negate": false,
+            "optionId": "employeeBackgroundChecks",
+            "matchEmpty": false
+          },
+          {
+            "type": "OPTION_EQUAL",
+            "value": true,
+            "negate": false,
+            "optionId": "adverseFinancialHistory",
+            "matchEmpty": false
+          }
+        ],
+        "outputModifier": "",
+        "calculationType": "ABSOLUTE",
+        "benefitConfiguration": {
+          "benefitId": "fca4ae79-6747-4e58-a63d-a818f826e471",
+          "obligation": "OPTIONAL_PER_EMPLOYEE",
+          "totalCostRange": [50, 200],
+          "benefitProviderId": "7dae1c23-74f3-4587-a33c-59d8a693314a",
+          "includedInPayroll": false,
+          "automateActivation": false,
+          "benefitAdminExpense": 0
+        },
+        "allowNegativeContribution": false,
+        "contributionClassification": "DEFAULT"
+      },
+      {
+        "type": "BENEFIT",
+        "amount": "140 * ${usdToLocalExchange}",
+        "subtype": "Criminal Record",
+        "conditions": [
+          { "type": "FIRST_PAY_PERIOD" },
+          {
+            "type": "OPTION_EQUAL",
+            "value": true,
+            "negate": false,
+            "optionId": "employeeBackgroundChecks",
+            "matchEmpty": false
+          },
+          {
+            "type": "OPTION_EQUAL",
+            "value": true,
+            "negate": false,
+            "optionId": "criminalRecord",
+            "matchEmpty": false
+          }
+        ],
+        "outputModifier": "",
+        "calculationType": "ABSOLUTE",
+        "benefitConfiguration": {
+          "benefitId": "fca4ae79-6747-4e58-a63d-a818f826e471",
+          "obligation": "OPTIONAL_PER_EMPLOYEE",
+          "totalCostRange": [50, 200],
+          "benefitProviderId": "7dae1c23-74f3-4587-a33c-59d8a693314a",
+          "includedInPayroll": false,
+          "automateActivation": false,
+          "benefitAdminExpense": 0
+        },
+        "allowNegativeContribution": false,
+        "contributionClassification": "DEFAULT"
+      },
+      {
+        "type": "BENEFIT",
+        "amount": "90 * ${usdToLocalExchange}",
+        "subtype": "Basic Package",
+        "conditions": [
+          {
+            "type": "OPTION_EQUAL",
+            "value": true,
+            "negate": false,
+            "optionId": "employeeBackgroundChecks",
+            "matchEmpty": false
+          },
+          {
+            "type": "OPTION_EQUAL",
+            "value": true,
+            "negate": false,
+            "optionId": "basicPackage",
+            "matchEmpty": false
+          },
+          { "type": "FIRST_PAY_PERIOD" }
+        ],
+        "outputModifier": "",
+        "calculationType": "ABSOLUTE",
+        "benefitConfiguration": {
+          "benefitId": "fca4ae79-6747-4e58-a63d-a818f826e471",
+          "obligation": "OPTIONAL_PER_EMPLOYEE",
+          "totalCostRange": [50, 200],
+          "benefitProviderId": "7dae1c23-74f3-4587-a33c-59d8a693314a",
+          "includedInPayroll": false,
+          "automateActivation": false,
+          "benefitAdminExpense": 0
+        },
+        "allowNegativeContribution": false,
+        "contributionClassification": "DEFAULT"
+      },
+      {
+        "type": "BENEFIT",
+        "amount": "200 * ${usdToLocalExchange}",
+        "subtype": "Standard Package",
+        "conditions": [
+          {
+            "type": "OPTION_EQUAL",
+            "value": true,
+            "negate": false,
+            "optionId": "employeeBackgroundChecks",
+            "matchEmpty": false
+          },
+          {
+            "type": "OPTION_EQUAL",
+            "value": true,
+            "negate": false,
+            "optionId": "basicPackage",
+            "matchEmpty": false
+          },
+          { "type": "FIRST_PAY_PERIOD" }
+        ],
+        "outputModifier": "",
+        "calculationType": "ABSOLUTE",
+        "benefitConfiguration": {
+          "benefitId": "fca4ae79-6747-4e58-a63d-a818f826e471",
+          "obligation": "OPTIONAL_PER_EMPLOYEE",
+          "totalCostRange": [50, 200],
+          "benefitProviderId": "7dae1c23-74f3-4587-a33c-59d8a693314a",
+          "includedInPayroll": false,
+          "automateActivation": false,
+          "benefitAdminExpense": 0
+        },
+        "allowNegativeContribution": false,
+        "contributionClassification": "DEFAULT"
+      },
+      {
+        "type": "MISCELLANEOUS",
+        "calculationType": "FLAT_PERCENTAGE",
+        "subtype": "Workers Accident Insurance",
+        "outputModifier": "",
+        "contributionClassification": "DEFAULT",
+        "conditions": [],
+        "allowNegativeContribution": false,
+        "input": "((${monthlyGrossSalary} - ${otherCosts})*5)*0.003+((((${monthlyGrossSalary} - ${otherCosts})*5)*0.003)*0.005) + (((${monthlyGrossSalary} - ${otherCosts})*5)*0.003+((((${monthlyGrossSalary} - ${otherCosts})*5)*0.003)*0.005))*0.18",
+        "inputMin": "",
+        "inputMax": "",
+        "percentage": "100",
+        "benefitConfiguration": {
+          "benefitId": "bd9269bc-bddd-4333-bab9-b7e04ae8c35e",
+          "benefitProviderId": "c41ef655-a492-4c39-81b7-5c950eb2e603",
+          "includedInPayroll": true,
+          "obligation": "MANDATORY_FOR_ALL_EMPLOYEES",
+          "totalCostRange": [0.3, 0.3],
+          "benefitAdminExpense": 0,
+          "automateActivation": false
+        },
+        "annual": { "type": "FROM_ACTIVATION", "month": 6 },
+        "ref": ""
+      },
+      {
+        "type": "MISCELLANEOUS",
+        "calculationType": "FLAT_PERCENTAGE",
+        "subtype": "Provident Fund - 5%",
+        "outputModifier": "",
+        "contributionClassification": "DEFAULT",
+        "conditions": [
+          {
+            "type": "OPTION_EQUAL",
+            "optionId": "pensioncontribution",
+            "value": "option1",
+            "matchEmpty": false,
+            "negate": false
+          },
+          {
+            "type": "OPTION_EQUAL",
+            "optionId": "providentfund",
+            "value": true,
+            "matchEmpty": false,
+            "negate": false
+          }
+        ],
+        "allowNegativeContribution": false,
+        "input": "${monthlyGrossSalary}",
+        "inputMin": "",
+        "inputMax": "",
+        "percentage": "5",
+        "benefitConfiguration": {
+          "benefitId": "5d9339b7-ff8a-402a-a6b8-7459f9593e55",
+          "benefitProviderId": "37bc3f90-252d-44f6-9be1-67689ebd6abb",
+          "includedInPayroll": true,
+          "obligation": "OPTIONAL_PER_EMPLOYEE",
+          "totalCostRange": [5, 10],
+          "benefitAdminExpense": 0,
+          "automateActivation": false
+        }
+      },
+      {
+        "type": "MISCELLANEOUS",
+        "calculationType": "FLAT_PERCENTAGE",
+        "subtype": "Provident Fund - 10%",
+        "outputModifier": "",
+        "contributionClassification": "DEFAULT",
+        "conditions": [
+          {
+            "type": "OPTION_EQUAL",
+            "optionId": "providentfund",
+            "value": true,
+            "matchEmpty": false,
+            "negate": false
+          },
+          {
+            "type": "OPTION_EQUAL",
+            "optionId": "pensioncontribution",
+            "value": "option 2",
+            "matchEmpty": false,
+            "negate": false
+          }
+        ],
+        "allowNegativeContribution": false,
+        "input": "${monthlyGrossSalary}",
+        "inputMin": "",
+        "inputMax": "",
+        "percentage": "10",
+        "benefitConfiguration": {
+          "benefitId": "5d9339b7-ff8a-402a-a6b8-7459f9593e55",
+          "benefitProviderId": "37bc3f90-252d-44f6-9be1-67689ebd6abb",
+          "includedInPayroll": true,
+          "obligation": "OPTIONAL_PER_EMPLOYEE",
+          "totalCostRange": [5, 10],
+          "benefitAdminExpense": 0,
+          "automateActivation": false
+        }
+      }
+    ]
+  },
+  "expressionVariables": {
+    "grossSalary": 9800000,
+    "monthlyGrossSalary": 9800000,
+    "annualGrossSalary": 117600000,
+    "payPeriodGrossSalary": 9800000,
+    "expenses": 0,
+    "directExpenses": 0,
+    "overtimePay": 0,
+    "backPay": 0,
+    "performanceBonus": 0,
+    "bonuses": 0,
+    "shiftDifferentialPay": 0,
+    "discretionary": 0,
+    "commissions": 0,
+    "benefits": 0,
+    "otherCosts": 0,
+    "terminationPayout": 0,
+    "netDeductions": 0,
+    "grossDeductions": 0,
+    "salaryWageOverPaymentDeduction": 0,
+    "leaveDayPayout": 0,
+    "allowances": 0,
+    "allIncome": 9800000,
+    "overtime": 0,
+    "leavePay": 0,
+    "usdToLocalExchange": 3585.88681,
+    "usdToSalaryPaymentExchange": 3585.88681,
+    "eurToLocalExchange": 4188.777757,
+    "eurToSalaryPaymentExchange": 4188.777757,
+    "gbpToLocalExchange": 4857.641693,
+    "gbpToSalaryPaymentExchange": 4857.641693,
+    "totalWorkingDays": 23,
+    "totalCalendarDays": 31,
+    "workedWorkingDays": 23,
+    "workedCalendarDays": 31,
+    "averageWorkingDays": 21.666666666666668,
+    "options.medicalInsurance": true,
+    "options.selectPlan": "premium",
+    "options.employeeAge": "under39",
+    "options.overridePremium": null,
+    "options.pension": true,
+    "options.employeeBackgroundChecks": true,
+    "options.academicAchievement": false,
+    "options.adverseFinancialHistory": true,
+    "options.criminalRecord": false,
+    "options.basicPackage": false,
+    "options.standardPackage": true,
+    "options.providentfund": false,
+    "options.pensioncontribution": "option1",
+    "options.employeeprovidentfund": false,
+    "options.overrideeprovident": null
+  },
+  "exchangeRatesContext": { "localCurrencyCode": "UGX" },
+  "netDeductions": 0,
+  "grossDeductions": 0,
+  "salaryWageOverPaymentDeduction": 0,
+  "employee": {
+    "id": "6f9b00fb-5283-489c-8098-7329e0d77a2d",
+    "companyId": "c3939d10-1956-427d-aa9b-e880dbaf7c96",
+    "name": "Bongomin Collins Lutaya",
+    "lastName": null,
+    "avatarUrl": null,
+    "nationality": "Ugandan",
+    "personalEmail": "coliebongo@gmail.com",
+    "phoneNumber": "+(256)786340565",
+    "jobDescription": "Lead marketing and operations execution across to drive growth and company performance.",
+    "manager": "Randy",
+    "workAddress": "BLOCK B, 6th Floor, Nakawa Business Park, Plot 3-5 Port Bell Road, P.O. Box 26939, Kampala, Uganda",
+    "jobTitle": "Head of Marketing & Operations",
+    "grossMonthlySalary": "9800000",
+    "grossHourlySalary": "9800000",
+    "grossPayPeriodSalary": null,
+    "playrollFeeAmount": 499,
+    "startDate": "2025-07-01T00:00:00.000Z",
+    "endDate": null,
+    "workingHoursStartTime": "1970-01-01T08:00:00.000Z",
+    "workingHoursEndTime": "1970-01-01T17:00:00.000Z",
+    "workingHoursStartDay": "MONDAY",
+    "workingHoursEndDay": "FRIDAY",
+    "timeTrackingEnabled": false,
+    "timeTrackingApprovals": false,
+    "salaryBasis": "MONTHLY",
+    "minimumHoursPerWeek": null,
+    "countryCode": "UG",
+    "region": null,
+    "status": "EMPLOYEE_SIGNED",
+    "bonusStructure": "",
+    "commissionStructure": "",
+    "employmentOptions": {
+      "medicalInsurance": true,
+      "selectPlan": "premium",
+      "employeeAge": "under39",
+      "overridePremium": null,
+      "pension": true,
+      "employeeBackgroundChecks": true,
+      "academicAchievement": false,
+      "adverseFinancialHistory": true,
+      "criminalRecord": false,
+      "basicPackage": false,
+      "standardPackage": true,
+      "providentfund": false,
+      "pensioncontribution": "option1",
+      "employeeprovidentfund": false,
+      "overrideeprovident": null,
+      "benefitConfig": {
+        "8b4ebc75-a907-4571-8cc7-cd17a1831d9e": {
+          "status": "ONBOARDING_COMPLETE",
+          "activationDate": "2025-07-01",
+          "employerOverride": { "contributionOverride": 352 }
+        },
+        "fca4ae79-6747-4e58-a63d-a818f826e471": {
+          "status": "ONBOARDING_COMPLETE",
+          "activationDate": "2025-07-01"
+        },
+        "bd9269bc-bddd-4333-bab9-b7e04ae8c35e": {
+          "activationDate": "2025-07-01",
+          "status": "ONBOARDING_COMPLETE",
+          "employerOverride": {}
+        }
+      }
+    },
+    "annualLeaveAmount": 21,
+    "annualLeavePeriod": "DAY",
+    "sickLeaveAmount": 30,
+    "sickLeavePeriod": "DAY",
+    "studyLeaveAmount": 0,
+    "studyLeavePeriod": "DAY",
+    "parentalLeaveAmount": 0,
+    "parentalLeavePeriod": "DAY",
+    "familyLeaveAmount": 0,
+    "familyLeavePeriod": "DAY",
+    "noticePeriodAmount": 90,
+    "noticePeriodPeriod": "DAY",
+    "probationAmount": 6,
+    "probationPeriod": "MONTH",
+    "externalId": null,
+    "otherMonthlyEmploymentCosts": "",
+    "otherMonthlyEmploymentCostsAmount": "0",
+    "otherAllowances": "[]",
+    "createdByAccountId": "483a58fb-efac-4929-b5a9-38540cf88e6d",
+    "updatedByAccountId": "58c7b63b-f7b4-4c74-b539-080c4971adfa",
+    "employeePortalDetails": {
+      "gender": "Male",
+      "nationalIdOrPassportNumber": "CM88071100J0DL",
+      "dateOfBirth": "1988-05-15",
+      "name": "Achola Susan",
+      "nextOfKinNumber": "+256775497338",
+      "nextOfKinRelationship": "Mother",
+      "emergencyContactName": "Achola Susan",
+      "emergencyContactNumber": "+256775497338",
+      "emergencyContactRelationship": "Mother",
+      "taxIdentificationNumber": "1010676560",
+      "pensionNationalSocialSecurity": "8814201058517",
+      "nationalIdCardCitizenFront": "https://playroll-personal-documents-main.s3.eu-west-2.amazonaws.com/personal-document/6f9b00fb-5283-489c-8098-7329e0d77a2d/aed17246-ae5c-4270-9630-b95849213e5c-c841445ef08f8641b9f48f1da17e8a15.png",
+      "nationalIdCardCitizenBack": "https://playroll-personal-documents-main.s3.eu-west-2.amazonaws.com/personal-document/6f9b00fb-5283-489c-8098-7329e0d77a2d/aed17246-ae5c-4270-9630-b95849213e5c-b8554ca0e76daa48668188561addec50.png",
+      "copyOfTinDocument ": "https://playroll-personal-documents-main.s3.eu-west-2.amazonaws.com/personal-document/6f9b00fb-5283-489c-8098-7329e0d77a2d/aed17246-ae5c-4270-9630-b95849213e5c-42c6254ea8cb9a2520371a9e9b61e38d.pdf",
+      "proofOfBankingDetails ": "https://playroll-personal-documents-main.s3.eu-west-2.amazonaws.com/personal-document/6f9b00fb-5283-489c-8098-7329e0d77a2d/aed17246-ae5c-4270-9630-b95849213e5c-222b62016789f8d08cb75f746dfee602.pdf",
+      "bankName": "ABSA",
+      "accountHolderName": "Bongomin Collins Lutaya",
+      "accountNumber": "6008798727",
+      "branchCode": "BARCUGKX",
+      "localbankcode": "BARCUGKX",
+      "passportCitizen ": "https://playroll-personal-documents-main.s3.eu-west-2.amazonaws.com/personal-document/6f9b00fb-5283-489c-8098-7329e0d77a2d/aed17246-ae5c-4270-9630-b95849213e5c-84d8fa9c20311c3cbeb850817a316935.pdf"
+    },
+    "citizenshipCountryCode": "UG",
+    "personalAddressLine1": "Plot 6 Kanyanya - Bahai Road Kampala Uganda ",
+    "personalAddressLine2": "",
+    "personalAddressCity": "kampala",
+    "personalAddressState": "Central",
+    "personalAddressZip": "10203",
+    "personalDetailsId": null,
+    "archived": false,
+    "employerOfRecordOld": null,
+    "employerOfRecordId": "f62ec690-4db7-4ab4-a655-45a1bc783050",
+    "employerSignatureId": "f927fbdd194792a882ceb26776cff066",
+    "nonSolicitationPeriod": null,
+    "nonSolicitationAmount": 0,
+    "restraintOfTradePeriod": null,
+    "restraintOfTradeAmount": 0,
+    "visaStatus": null,
+    "visaStartDate": null,
+    "visaExpiry": null,
+    "agreementEmployeeSignatureId": null,
+    "agreementEmployerSignatureId": null,
+    "agreementRequestId": null,
+    "agreementSignedByEmployee": false,
+    "agreementStatus": "PENDING_UPLOAD",
+    "agreementAlreadySignedUrl": null,
+    "agreementUploadedDate": null,
+    "agreementEmployeeSignDate": null,
+    "agreementCounterSignDate": null,
+    "agreementUploadCount": 0,
+    "agreementCounterEmailSent": false,
+    "agreementCompletedEmailSent": false,
+    "foreignSalaryCurrency": null,
+    "foreignSalaryAmount": null,
+    "peggedSalaryType": null,
+    "peggedSalaryAmount": null,
+    "peggedSalaryCurrencyCode": null,
+    "peggedSalaryTimestamp": null,
+    "peggedSalaryAdjustmentEnabled": null,
+    "peggedSalaryAdjustmentDay": null,
+    "peggedSalaryExchangeRate": null,
+    "peggedSalaryAdjustmentDate": null,
+    "peggedSalaryLastAdjustmentExchangeRate": null,
+    "peggedSalaryLastAdjustmentDate": null,
+    "peggedSalaryLastAdjustmentPreviousAmount": null,
+    "sourceEmployeeId": "6f9b00fb-5283-489c-8098-7329e0d77a2d",
+    "createdAt": "2025-05-13T12:31:19.521Z",
+    "updatedAt": "2025-07-10T14:56:43.449Z",
+    "annualLeaveExtraBalance": null,
+    "annualLeaveStartingBalance": null,
+    "pauseEmailReminders": false,
+    "auditOriginSource": "ADMIN_WEBAPP",
+    "terminationDetails": null
+  },
+  "totalsLocalCurrency": {
+    "currencyCode": "UGX",
+    "baseSalary": 9800000,
+    "overtimePay": 0,
+    "backPay": 0,
+    "bonus": 0,
+    "shiftDifferentialPay": 0,
+    "discretionary": 0,
+    "commission": 0,
+    "expenses": 0,
+    "directExpenses": 0,
+    "grossDeductions": 0,
+    "netDeductions": 0,
+    "salaryWageOverPaymentDeduction": 0,
+    "other": 0,
+    "employerContribution": 4962407.126232,
+    "employeeContribution": 3337833.3333333335,
+    "employeeTerminationPayout": 0,
+    "employeeLeaveDaysAmount": 0,
+    "totalExcludingPlayrollFee": 14762407.126232,
+    "earlyTerminationFee": 0,
+    "playrollFee": 1789357.51819,
+    "totalIncludingPlayrollFee": 16551764.644422
+  },
+  "totalsBillingCurrency": {
+    "currencyCode": "USD",
+    "baseSalary": 2801.2596415445696,
+    "overtimePay": 0,
+    "backPay": 0,
+    "bonus": 0,
+    "shiftDifferentialPay": 0,
+    "discretionary": 0,
+    "commission": 0,
+    "expenses": 0,
+    "directExpenses": 0,
+    "grossDeductions": 0,
+    "netDeductions": 0,
+    "salaryWageOverPaymentDeduction": 0,
+    "other": 0,
+    "employerContribution": 1418.4684497578437,
+    "employeeContribution": 954.095694578454,
+    "employeeTerminationPayout": 0,
+    "employeeLeaveDaysAmount": 0,
+    "totalExcludingPlayrollFee": 4219.728091302413,
+    "earlyTerminationFee": 0,
+    "playrollFee": 499,
+    "totalIncludingPlayrollFee": 4718.728091302413
+  },
+  "exemptedFromPlayrollFee": false
+}
