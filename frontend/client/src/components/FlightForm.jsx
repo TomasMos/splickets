@@ -1,18 +1,14 @@
-const airports = [
-  { code: "CPT", name: "Cape Town" },
-  { code: "DUR", name: "Durban" },
-  { code: "JNB", name: "Johannesburg" },
-  { code: "PLZ", name: "Port Elizabeth" },
-  { code: "ELS", name: "East London" },
-  { code: "GRJ", name: "George" },
-  { code: "ZNZ", name: "Zanzibar" },
-];
+import AirportInput from "./AirportInput";
 
 function FlightForm({ form, setForm, onSearch }) {
   const searchDisabled = !form.origin || !form.destination || !form.date;
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSelect = (field, value) => {
+    setForm({ ...form, [field]: value });
   };
 
   const handleSubmit = (e) => {
@@ -22,28 +18,16 @@ function FlightForm({ form, setForm, onSearch }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <select name="origin" onChange={handleChange} value={form.origin}>
-        <option value="">Origin</option>
-        {airports.map((a) => (
-          <option key={a.code} value={a.code}>
-            {a.name} {a.code}
-          </option>
-        ))}
-      </select>
-
-      <select
+      <AirportInput
+        name="origin"
+        value={form.origin}
+        onSelect={handleSelect}
+      />
+      <AirportInput
         name="destination"
-        onChange={handleChange}
         value={form.destination}
-      >
-        <option value="">Destination</option>
-        {airports.map((a) => (
-          <option key={a.code} value={a.code}>
-            {a.name} {a.code}
-          </option>
-        ))}
-      </select>
-
+        onSelect={handleSelect}
+      />
       <input
         name="date"
         type="date"
@@ -51,7 +35,6 @@ function FlightForm({ form, setForm, onSearch }) {
         value={form.date}
         min={new Date().toISOString().split("T")[0]}
       />
-
       <button type="submit" disabled={searchDisabled}>
         Search
       </button>

@@ -3,6 +3,8 @@ function Cart({ cart, setCart }) {
     setCart(cart.filter((f) => f.id !== id));
   };
 
+  const total = cart.reduce((sum, item) => sum + Number(item.price), 0);
+
   return (
     <>
       <h2>Cart</h2>
@@ -14,6 +16,7 @@ function Cart({ cart, setCart }) {
           </li>
         ))}
       </ul>
+      <div>Total: ${total.toFixed(2)}</div>
     </>
   );
 }

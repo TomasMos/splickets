@@ -8,6 +8,8 @@ fs.readFile("./data.json", "utf8", (err, jsonString) => {
   try {
     const data = JSON.parse(jsonString);
     const benefitObjects = data.employeeContext.options.benefitConfig;
+    console.log(benefitObjects);
+    
     const onceOfftypes = [
       "FIRST_PAY_PERIOD",
       "LAST_PAY_PERIOD",
