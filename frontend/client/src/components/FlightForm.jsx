@@ -17,28 +17,28 @@ function FlightForm({ form, setForm, onSearch }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <AirportInput
-        name="origin"
-        value={form.origin}
-        onSelect={handleSelect}
-      />
-      <AirportInput
-        name="destination"
-        value={form.destination}
-        onSelect={handleSelect}
-      />
-      <input
-        name="date"
-        type="date"
-        onChange={handleChange}
-        value={form.date}
-        min={new Date().toISOString().split("T")[0]}
-      />
+      <form onSubmit={handleSubmit}>
+        <AirportInput
+          name="origin"
+          value={form.origin}
+          onSelect={handleSelect}
+        />
+        <AirportInput
+          name="destination"
+          value={form.destination}
+          onSelect={handleSelect}
+        />
+        <input
+          name="date"
+          type="date"
+          onChange={handleChange}
+          value={form.date}
+          min={new Date().toISOString().split("T")[0]}
+        />
       <button type="submit" disabled={searchDisabled}>
-        Search
-      </button>
-    </form>
+          Search
+        </button>
+      </form>
   );
 }
 

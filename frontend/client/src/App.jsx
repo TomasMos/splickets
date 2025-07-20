@@ -30,8 +30,8 @@ useEffect(() => {
   }, [cart]);
 
   return (
-    <div>
-      <h1>Splickets Alpha</h1>
+    <div className="bg-amber-300">
+      <h1 className="text-emerald-600 text-2xl">Splickets Alpha</h1>
       <FlightSearch cart={cart} setCart={setCart} />
       <CartManager cart={cart} setCart={setCart} />
     </div>

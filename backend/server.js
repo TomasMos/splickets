@@ -26,14 +26,11 @@ app.get("/api/autocomplete", async (req, res) => {
       page: { limit: 5 },
     });
 
-    console.log(response);
-    
-
     const results = response.data.map((loc) => ({
       code: loc.iataCode,
       name: loc.name,
       city: loc.address.cityName,
-      type: loc.subType
+      type: loc.subType,
     }));
     res.json(results);
   } catch (error) {

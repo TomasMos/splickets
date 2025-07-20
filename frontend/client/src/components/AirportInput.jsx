@@ -22,11 +22,25 @@ function AirportInput({ name, value, onSelect }) {
   }, [query]);
 
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative" }} className="flex p-1">
       <input
         name={name}
         placeholder={`Enter airport...`}
         value={value}
+         className="
+          w-full max-w-md
+          px-4 py-3
+          text-lg
+          bg-white
+          border border-gray-300
+          rounded-xl
+          focus:outline-none
+          focus:ring-2 focus:ring-blue-500
+          focus:border-transparent
+          transition duration-200 ease-in-out
+          shadow-sm
+          placeholder-gray-400
+        "
         onChange={(e) => {
           setQuery(e.target.value);
           onSelect(name, e.target.value);

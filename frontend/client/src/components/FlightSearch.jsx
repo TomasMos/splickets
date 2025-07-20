@@ -35,7 +35,7 @@ function FlightSearch({ cart, setCart }) {
   };
 
   return (
-    <>
+    <div className="bg-red-700 p-2">
       <FlightForm form={form} setForm={setForm} onSearch={searchFlights} />
       {loading && <p>Loading...</p>}
       <FlightResults
@@ -45,8 +45,9 @@ function FlightSearch({ cart, setCart }) {
         sortBy={sortBy}
         setSortBy={setSortBy}
         addToCart={addToCart}
+        cart={cart}
       />
-    </>
+    </div>
   );
 }
 
